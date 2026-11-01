@@ -1,0 +1,30 @@
+{
+  "id": "GEN1_N64_NPC_REPLACEMENT_RUMBLE",
+  "name": "RBY 3D NPC",
+  "version": "0.4.59-rumble-four-options",
+  "api": 2,
+  "entry": "main.lua",
+  "profile": "content",
+  "category": "GRAPHICS",
+  "games": [
+    "gen1"
+  ],
+  "game_version": "0.0.0-dev || >=0.1.37 <2.0.0",
+  "priority": 111,
+  "dependencies": [],
+  "optional_dependencies": [
+    "DRAMALESS_SHAPE",
+    "DRAMATIC_SHAPE",
+    "potato_voxel",
+    "BATTLE_ART_VOXEL_FORK"
+  ],
+  "conflicts": [
+    "PORYGONAL_OVERWORLD_CHARACTERS",
+    "GEN1_N64_NPC_REPLACEMENT"
+  ],
+  "permissions": [
+    "engine_internals"
+  ],
+  "affects_link": false,
+  "description": "3D NPC and Rumble Pokemon replacements for Red, Blue and Yellow. Four controls: character shading, player size, NPC size and render view range. Hidden silhouettes and always-on 3D Fly."
+}

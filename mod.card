@@ -1,0 +1,10 @@
+return {
+ summary = "RBY 3D NPC: animated NPC and Rumble Pokemon replacements for compatible voxel renderers.",
+ tags = {"graphics", "characters", "sprite-replacement", "3d", "animation"},
+ differences = { changed = {
+  "never registers its own voxel/world rendering pipeline",
+  "does not load maps, modify buildings, replace terrain or change collision",
+  "uses renderer-owned character sprite draw hooks when voxel rendering is active",
+  "includes custom Pidgeot and Red flight mesh animation; native HM Fly logic stays with game"
+ }}
+}

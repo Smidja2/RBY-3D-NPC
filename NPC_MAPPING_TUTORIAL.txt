@@ -1,0 +1,121 @@
+RBY 3D NPC - NPC MAPPING TUTORIAL
+==================================
+
+This mod changes the appearance of original Pokemon Red / Blue / Yellow
+NPCs and decorative Pokemon when a supported external voxel renderer is active.
+It does NOT add/delete NPCs, change dialogue, move NPC positions, or alter trainer
+battles. The approved Red movement, Fly, silhouette, and other visuals are intact.
+
+QUICK START
+-----------
+1. Make a backup of RBY 3D NPC.zip before editing it.
+2. Open the ZIP with 7-Zip or another ZIP editor. You may also extract the ZIP,
+   edit the files, and zip the CONTENTS again (manifest.json must be at ZIP root,
+   not inside an extra containing folder).
+3. Open npc_decisions.lua in a UTF-8 plain-text editor (VS Code, Notepad++).
+4. Go to the bottom of the file, just ABOVE 'return M'. You will see
+   'USER CUSTOM NPC MAPPINGS'. Add your entries there so they override older
+   assignments in the same Lua lookup table.
+5. Save npc_decisions.lua as UTF-8; replace the file inside the ZIP.
+6. Disable the old/duplicate NPC replacement mod, install your edited ZIP,
+   enable a compatible voxel renderer, and enter a map to test it. A map change
+   or game restart may be needed because identities can be cached per NPC.
+
+BASIC FORMAT
+------------
+M.byObject["ORIGINAL_NPC_OBJECT_ID"] = "replacement_model_name"
+M.byMapCell["map_slug:x:y"] = "replacement_model_name"
+M.bySprite["SPRITE_NAME"] = "replacement_model_name"
+
+Examples (remove '--' when using the lines in the commented customization area):
+
+  -- M.byObject["CELADONCITY_GIRL"] = "lass"
+  -- M.byMapCell["celadoncity:14:19"] = "lass"
+  -- M.bySprite["SPRITE_FISHER"] = "fisherman"
+
+Important: Many NPCs have STRONGER ROM trainer-class or dialogue mappings;
+byObject/byMapCell/bySprite may not override those. For a particular civilian,
+edit the corresponding highest-priority assignment instead, for example:
+
+  -- M.bySourceDialogueObject["redblue:celadoncity:CELADONCITY_GIRL"] = "lass"
+  -- M.bySourceDialogueObject["yellow:celadoncity:CELADONCITY_GIRL"] = "lass"
+
+These two examples use real IDs already found in this release.
+They change only the appearance, not what the character says or does.
+
+MAPPING PRIORITY (IMPORTANT)
+----------------------------
+For most NPCs, when multiple entries target the same NPC, the registry
+selects roughly in this order:
+  1. Exact original ROM trainer class (bySourceTrainerObject / ...Cell)
+  2. Exact source dialogue role (bySourceDialogueObject / ...Cell)
+  3. Dialogue mapping (byDialogue / byDialogueCell)
+  4. Game-version-specific coordinates / special decorative Pokemon
+  5. Object ID (byObject)
+  6. Map spawn cell (byMapCell)
+  7. Generic sprite fallback (bySprite)
+There are special story-state, Pokemon, and location guards (e.g. Bill, Route 1),
+which may override general entries. The priority is not controlled by where
+lines appear; LAST entry wins only within the SAME lookup table and key.
+
+RECOMMENDED CHANGES
+-------------------
+* CIVILIAN / DIALOGUE NPC: Start with bySourceDialogueObject for exact character
+  and both game-version keys if you want R/B and Yellow changed. Use the source
+  map slug and source object ID exactly as written in npc_decisions.lua.
+* BATTLE TRAINER: The original ROM trainer class is authoritative; do not
+  casually change it to a different job. For a deliberate visual override,
+  adjust the corresponding bySourceTrainerObject and bySourceTrainerCell entries.
+* DECORATIVE POKEMON: Keep story state and species correct; look for existing
+  pokemon_* assignments and exact Red/Blue/Yellow overrides first.
+* ENTIRE SPRITE CLASS: Use bySprite only as a last-resort fallback. It can affect
+  unrelated characters that share the original Game Boy sprite.
+* MAP CELL: Keys use lowercase normalized map slug and ORIGINAL spawn cell
+  coordinates, not current walking position. Example: celadoncity:14:19.
+
+HOW TO FIND A CHARACTER
+-----------------------
+Search in npc_decisions.lua for its location, original object label, or model:
+  CELADONCITY_GIRL
+  VIRIDIANFOREST_YOUNGSTER1
+  BILLSHOUSE_BILL
+There may be several entries for different Red/Blue and Yellow versions.
+An existing mapping you find early in the file may be replaced by a later entry;
+search all occurrences and prefer editing/overriding the highest-priority one.
+
+VALID MODEL NAMES
+-----------------
+Names must match the replacement models' exact lowercase base names.
+For human NPCs, browse assets/runtime/*.lua or assets/render/*_rest.bin.
+Examples of existing models in this release:
+  lass, beauty, boy, youngster, fisherman, gentleman,
+  hiker, nerd, scientist_m, scientist_f, nurse_joy,
+  bill, misty, brock, blue_champion, rocket_grunt_m,
+  rocket_executive_f, rocket_executive_m.
+Do NOT use the filename extension (e.g. use 'lass', not 'lass.glb').
+Some *_v29_b/c models are valid alternative appearances only if the
+corresponding replacement asset files are present in the ZIP.
+
+KEEP ANIMATIONS AND RENDERERS INTACT
+-----------------------------------
+Only edit npc_decisions.lua for visual casting changes. Do not rename
+assets/render, assets/runtime, renderers, or the animation catalog. The
+'RBY 3D NPC' mod uses one external voxel world renderer (Dramaless,
+Dramatic, Potato, or Battle Art), not its own world renderer. Keep only one
+version of this NPC replacement mod enabled at a time.
+
+TROUBLESHOOTING
+---------------
+Mapping doesn't change? Search for a higher-priority source trainer/dialogue
+entry, check the spelling and game version, then reload the map or restart.
+Character vanishes? Revert to an available model key; check corresponding
+assets/runtime and assets/render names. Never delete the original map object.
+Mod fails to load? Check that manifest.json and main.lua are at ZIP root and
+that Lua syntax (quotes, brackets, key capitalization) is correct.
+
+ORIGINAL APPROVED V57 BASELINE IS A SEPARATE MOD BUILD.
+This ZIP is the updated Rumble Pokemon variant with V59 UV correction.
+
+SPEAROW (RUMBLE): The Viridian Nickname House bird Speary uses pokemon_spearow.
+Change M.byObject["VIRIDIANNICKNAMEHOUSE_SPEAROW"] or
+M.byMapCell["viridiannicknamehouse:5:5"] if desired.
