@@ -4,7 +4,7 @@ return {
  differences = { changed = {
   "never registers its own voxel/world rendering pipeline",
   "does not load maps, modify buildings, replace terrain or change collision",
-  "uses renderer-owned character sprite draw hooks when voxel rendering is active",
+  "uses renderer-owned character sprite draw hooks when voxel rendering is active; unified Fly choreography across all supported renderers",
   "includes custom Pidgeot and Red flight mesh animation; native HM Fly logic stays with game"
  }}
 }

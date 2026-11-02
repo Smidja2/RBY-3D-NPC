@@ -1,0 +1,17 @@
+RBY 3D NPC - Unified Fly v8 / Terrarium seated NPC alignment
+Target: Terrarium 1.32.0-beta and all previously supported renderers.
+
+Changed since v7:
+- Terrarium Pokemon Center authored couch-figure replacement now places the
+  seated GLB at the actual 8-unit couch-seat elevation instead of allowing
+  the original 2D floor-level figure anchor to place it on the floor.
+- Keeps any authored figure height above the couch height.
+- Uses the identical seated GLB transform in the visible pass and shadow pass.
+- Preserves all unified Fly v7 choreography and every other renderer adapter,
+  original assets, animations, textures, and options without changes.
+
+Install: remove previous RBY 3D NPC ZIP versions, install ONLY v8 alongside
+one selected world renderer. Do not install v7 and v8 simultaneously.
+
+Verification: Lua syntax and static placement regression checks; actual
+in-game alignment still requires testing in a Pokemon Center.

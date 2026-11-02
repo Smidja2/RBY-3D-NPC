@@ -1,0 +1,5 @@
+RBY 3D NPC HM Fly v14: exact selected Pokemon fix
+
+The Fly user is now captured from the real PartyMenu.update -> TownMap transition, not from a guessed first Fly-knowing party slot. The selected party member is retained in the TownMap onFly callback, verified against Game.save.party at confirmation, and consumed once by the Fly session. Cancel or invalid destination does not arm a user. If there is no confirmed user or imported actor, use the bundled Pidgeot. Ranch follower hiding, unified choreography, and existing renderer adapters are unchanged.
+
+Remove older RBY 3D NPC versions before installing v14. Check the NPC HM Fly logs for bound / confirmed / selected / fallback messages. In-game verification required.

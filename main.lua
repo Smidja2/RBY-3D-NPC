@@ -355,7 +355,7 @@ if mod.events and type(mod.events.on)=="function" then
         if not attachToRenderer("game.ready") and not attachFailureLogged then
             attachFailureLogged=true
             mod.log:warn("NPC GLB addon did not find an initialized supported voxel renderer. "..
-                "Install and enable Potato, Dramaless, Dramatic, or Battle Art Voxel; "..
+                "Install and enable Terrarium, Potato, Dramaless, Dramatic, or Battle Art Voxel; "..
                 "leave world rendering with that mod.")
         end
     end)

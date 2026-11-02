@@ -1,0 +1,28 @@
+RBY 3D NPC v10 -- Species-aware HM Fly mounts (all 5 renderers)
+
+WHAT CHANGED
+- Uses the native HM Fly animation source when it provides a Pokémon species or party member; otherwise uses bundled Pidgeot (NEVER chooses the first Fly-knowing party member).
+- Looks for an installed Rumble or XD 386 importer with a compatible exported createActor + rig.drawPackets API.
+- When the external importer successfully supplies the selected species, the HM Fly mount uses its actual animated Pokemon mesh and shadow. It does not alter or package that importer.
+- Missing/unavailable/incompatible model => immediately use the bundled custom Pidgeot GLB, with the same Red rider.
+- Shared fly_choreography.lua is unchanged: departure, direction, arrival, dismount, flyaway timing identical for Terrarium, Dramaless, Dramatic, Potato, Battle Art.
+- All prior mapping and Terrarium seated-figure fixes preserved.
+
+IMPORTER INTERFACE
+- The uploaded DX builder exports POKEMON_XD_386_API.createActor(species, opts) and the actor's rig.drawPackets(model,phase,owner,seq).
+- Supports compatible RUMBLE_API / POKEMON_RUMBLE_API actor providers with the SAME interface. Rumble importers without this API do not provide geometry to this bridge, so Pidgeot will be used.
+- Requires the imported species model pack to be installed and loaded for that Pokemon. The DX REALTIME BATTLE stage-only mod does not supply the Pokemon models: use 368ImporterDXGen1 and 368PackDXGen1.
+- Provider-created actor is manual and invisible to its own auto-render pass to avoid doubles; its geometry is drawn only in the NPC Fly pass.
+
+SPECIES SELECTION LIMITATION
+- Some Gen1Recomp builds store Fly animation timing but not the chosen party slot/species. In that case this mod deterministically selects the FIRST party member with the FLY move; if multiple eligible mons are present this may not be the user's intended selection. No guess is made from the world map or nearby wildlife.
+- Pidgeot is the fallback when the game reports no usable species or any model provider is unavailable.
+
+VERIFICATION
+- Lua compilation passed for all five adapters and the optional provider.
+- Source inspection confirmed the uploaded DX importer's mesh packet and animation API. A mocked API draw/fallback test passed; actual in-game combinations were not run.
+
+INSTALL
+- Remove prior RBY 3D NPC versions (v9 and older); use only this ZIP alongside a selected voxel renderer.
+- Install 368ImporterDXGen1 + 368PackDXGen1 if you want to use DX Pokemon models. Battle-only mod is insufficient.
+- Test with a non-Pidgeot Fly user, then without the importer to confirm Pidgeot fallback.

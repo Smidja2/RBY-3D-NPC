@@ -1,0 +1,1 @@
+return {name="copycat_doll_bird",feet=0.00163011905,scale=3.97732,verts=1275,nodes={{parent=0,translation={0,0.0070567131,0},rotation={0,0,0,1},scale={1,1,1},matrix=nil}},skins={},segments={{start=1,count=1275,node=1,skin=0,morph=0,weights={},morphOffset=45904}},animations={}}

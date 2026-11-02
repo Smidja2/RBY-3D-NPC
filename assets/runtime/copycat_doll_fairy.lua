@@ -1,0 +1,1 @@
+return {name="copycat_doll_fairy",feet=-0.00654538674,scale=5,verts=1393,nodes={{parent=0,translation={0,0,0},rotation={0,0,0,1},scale={1,1,1},matrix=nil}},skins={},segments={{start=1,count=1393,node=1,skin=0,morph=0,weights={},morphOffset=50152}},animations={}}

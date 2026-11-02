@@ -4611,6 +4611,41 @@ M.byMapCell["redblue:silphco11f:15:9"]="rocket_executive_f"
 M.byMapCell["yellow:silphco11f:15:9"]="rocket_executive_f"
 M.byMapCell["yellow:rockethideoutb4f:11:2"]="rocket_executive_m"
 -- v48: version-scoped identity casting; 1 female + 1 male Rocket Executive per game.
+-- v9: source-verified decorative Pokemon fallback for renderers that expose
+-- numeric object IDs instead of pret's symbolic map object constants.
+-- Exact map/spawn coordinates are confirmed against the original Red/Blue
+-- and Yellow data/maps/objects sources.  Do NOT remap generic MONSTER/BIRD/
+-- FAIRY globally: their species differ between rooms and game versions.
+M.byMapCell["mrfujishouse:1:3"]="pokemon_nidorino"
+M.byMapCell["vermilioncity:29:9"]="pokemon_machop"
+M.byMapCell["pokemonfanclub:1:4"]="pokemon_seel"
+M.byMapCell["celadonmansion1f:1:8"]="pokemon_clefairy"
+M.byMapCell["celadonmansion1f:4:4"]="pokemon_nidoran_f"
+M.byMapCell["copycatshouse1f:1:4"]="pokemon_chansey"
+M.byMapCell["saffroncity:31:12"]="pokemon_pidgeot"
+M.byMapCell["saffronpidgeyhouse:0:4"]="pokemon_pidgey"
+M.byMapCell["vermilionpidgeyhouse:3:5"]="pokemon_pidgey"
+M.byMapCell["yellow:ceruleanmelanieshouse:4:1"]="pokemon_bulbasaur"
+M.byMapCell["yellow:summerbeachhouse:5:3"]="pokemon_pikachu"
+
+-- Moving creatures can walk away from their spawn cell before the first
+-- renderer observation.  Registry.lookup already has a guarded nearest-spawn
+-- fallback (same sprite and distance < sqrt(13) tiles); provide only confirmed
+-- source spawns, not broad guessed sprites.
+local function pokemonSpawn(map,x,y,sprite,base,version,object)
+    M.spawnRoster[map]=M.spawnRoster[map] or {}
+    table.insert(M.spawnRoster[map],{
+        x=x,y=y,sprite=sprite,base=base,version=version,object=object
+    })
+end
+pokemonSpawn("vermilioncity",29,9,"SPRITE_MONSTER","pokemon_machop",nil,"VERMILIONCITY_MACHOP")
+pokemonSpawn("celadonmansion1f",1,8,"SPRITE_FAIRY","pokemon_clefairy",nil,"CELADONMANSION1F_CLEFAIRY")
+pokemonSpawn("celadonmansion1f",4,4,"SPRITE_MONSTER","pokemon_nidoran_f",nil,"CELADONMANSION1F_NIDORANF")
+pokemonSpawn("copycatshouse1f",1,4,"SPRITE_FAIRY","pokemon_chansey",nil,"COPYCATSHOUSE1F_CHANSEY")
+pokemonSpawn("saffronpidgeyhouse",0,4,"SPRITE_BIRD","pokemon_pidgey",nil,"SAFFRONPIDGEYHOUSE_PIDGEY")
+pokemonSpawn("vermilionpidgeyhouse",3,5,"SPRITE_BIRD","pokemon_pidgey",nil,"VERMILIONPIDGEYHOUSE_PIDGEY")
+pokemonSpawn("summerbeachhouse",5,3,"SPRITE_PIKACHU","pokemon_pikachu","yellow","SUMMERBEACHHOUSE_PIKACHU")
+
 -- ================================================================
 -- USER CUSTOM NPC MAPPINGS (OPTIONAL)
 -- ================================================================

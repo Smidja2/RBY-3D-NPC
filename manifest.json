@@ -1,7 +1,7 @@
 {
   "id": "GEN1_N64_NPC_REPLACEMENT_RUMBLE",
   "name": "RBY 3D NPC",
-  "version": "0.4.59-rumble-four-options",
+  "version": "14.0.0",
   "api": 2,
   "entry": "main.lua",
   "profile": "content",
@@ -13,6 +13,7 @@
   "priority": 111,
   "dependencies": [],
   "optional_dependencies": [
+    "TERRARIUM",
     "DRAMALESS_SHAPE",
     "DRAMATIC_SHAPE",
     "potato_voxel",
@@ -26,5 +27,5 @@
     "engine_internals"
   ],
   "affects_link": false,
-  "description": "3D NPC and Rumble Pokemon replacements for Red, Blue and Yellow. Four controls: character shading, player size, NPC size and render view range. Hidden silhouettes and always-on 3D Fly."
+  "description": "RBY 3D NPC standalone GLB replacement. Unified HM Fly choreography with optional Ranch/Rumble/DX selected-HM-Fly-user 3D mount actors and bundled Pidgeot fallback; Terrarium, Dramaless, Dramatic, Potato and Battle Art."
 }

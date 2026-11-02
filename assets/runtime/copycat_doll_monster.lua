@@ -1,0 +1,1 @@
+return {name="copycat_doll_monster",feet=-0.0488567352,scale=4.72751,verts=1181,nodes={{parent=0,translation={0,1.11716986,0},rotation={0,0,0,1},scale={1,1,1},matrix=nil}},skins={},segments={{start=1,count=1181,node=1,skin=0,morph=0,weights={},morphOffset=42520}},animations={}}
